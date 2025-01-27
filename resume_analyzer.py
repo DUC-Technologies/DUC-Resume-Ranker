@@ -4,12 +4,13 @@ import glob
 import PyPDF2
 
 
-OPENAI_API_KEY = getpass()
-os.environ["OPENAI_API_KEY"]  = OPENAI_API_KEY
+# OPENAI_API_KEY = getpass()
+# os.environ["OPENAI_API_KEY"]  = OPENAI_API_KEY
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.chains.summarize import load_summarize_chain
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_ollama.llms import OllamaLLM
 from langchain.chains.combine_documents.stuff import StuffDocumentsChain
 from langchain.chains.llm import LLMChain
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
@@ -32,7 +33,8 @@ def summarize_resumes(pdf_folder):
         prompt = PromptTemplate.from_template(prompt_template)
 
         # Define LLM chain
-        llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
+        # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
+        llm = OllamaLLM(model="qwen2.5:14b-instruct-q8_0")
         llm_chain = LLMChain(llm=llm, prompt=prompt)
 
         # Define StuffDocumentsChain
@@ -60,7 +62,8 @@ def extract_job_req(job_desc):
     prompt = PromptTemplate.from_template(prompt_template)
    
     
-    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
+    # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
+    llm = OllamaLLM(model="qwen2.5:14b-instruct-q8_0")
     llm_chain = LLMChain(llm=llm, prompt=prompt)
     job_desc_json = llm_chain.invoke(desc)
     return job_desc_json
@@ -105,15 +108,15 @@ def match_resumes(pdf_folder, job_desc_json):
          'Score for degree':
          'Total score':
          
-         
-         """
+                  """
         prompt = PromptTemplate.from_template(prompt_template)
         responses=[]
         for pdf_file in glob.glob(pdf_folder + "/*.pdf"):
             loader = PyPDFLoader(pdf_file) 
             documents = loader.load()
             # Define LLM chain
-            llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
+            # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
+            llm = OllamaLLM(model="qwen2.5:14b-instruct-q8_0")
             llm_chain = LLMChain(llm=llm, prompt=prompt)
             response = llm_chain.invoke({'text':documents, 'job_desc_json':job_desc_json})
             responses.append(response)

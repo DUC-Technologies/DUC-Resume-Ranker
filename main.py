@@ -2,7 +2,7 @@
 import resume_analyzer as ra
 import streamlit as st
 import pprint
-import json,operator
+import json, operator
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center;'>Resume Ranker</h1>", unsafe_allow_html=True)
@@ -68,7 +68,13 @@ with col3:
     new_result = []
 
     for i in analysis_result:
-        new_result.append(i['text'])
+        s = i['text'].replace("`",'"')
+        index_start = s.find('"""json')
+        index_end = s.rfind('"""')
+        if index_start != -1 and index_end != -1:
+            s = s[index_start+7:index_end]
+        new_result.append(s)
+        print(s, "-----------")
     result = [json.loads(idx.replace("'",'"')) for idx in new_result]
     print(f"\n\n\n Candidates are: \n {result}")
 
