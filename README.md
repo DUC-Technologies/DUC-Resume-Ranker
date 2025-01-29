@@ -2,8 +2,8 @@
 
 <i>Built for Scale AI Hackathon </i>
 
-Resume Ranker analyzes multiple resumes submitted against a given job description and assigns a score for each candidate based on their experience, technical skills, social skills and degree.
+Сервис по составлению резюме анализирует несколько резюме, представленных в соответствии с заданным описанием вакансии, и присваивает оценку каждому кандидату на основе его опыта работы, технических навыков, уровня ЗП и образоваия.
 
-This tool enables the HR Manager to shortlist the top candidates amongst the hundreds of applications they receive for each position.
+Этот инструмент позволяет менеджеру по персоналу составлять короткий список лучших кандидатов среди сотен заявок, которые они получают на каждую должность.
 
 ![Screen Shot 2024-04-21 at 6 45 27 PM](https://github.com/swethag04/scaleai-hackathon/assets/18649557/89c4e0b9-4387-4ef9-992b-74589c6e3b43)
