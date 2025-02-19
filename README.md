@@ -4,3 +4,19 @@
 
 Этот инструмент позволяет менеджеру по персоналу составлять короткий список лучших кандидатов среди сотен заявок, которые они получают на каждую должность.
 ![image](https://github.com/user-attachments/assets/26bffed6-7499-4515-ac6d-3a061e6eee46)
+
+### Запуск проекта в dev-режиме
+- Установите и активируйте виртуальное окружение
+```
+python -m venv venv
+sourse venv/Scripts/activate #для Windows
+или
+source venv/bin/activate #для Linux
+```
+- Установите зависимости из файла requirements.txt
+```
+pip install -r requirements.txt
+``` 
+- Выполните команду:
+```
+streamlit run main.py --theme.base="light"
